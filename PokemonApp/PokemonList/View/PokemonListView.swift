@@ -13,13 +13,24 @@ struct PokemonListView: View {
     @StateObject var viewModel = PokemonListViewModel()
 
     var body: some View {
-        VStack {
-            ForEach(viewModel.pokemons) { pokemon in
-                Text(pokemon.name)
+        NavigationStack {
+            ScrollView {
+                VStack {
+                    ForEach(viewModel.pokemons) { pokemon in
+                        NavigationLink(
+                            destination: PokemonDetailView(
+                                viewModel: PokemonDetailViewModel(
+                                    pokemon: pokemon))
+                        ) {
+                            Text(pokemon.name)
+                        }
+                    }
+                }
+                .onAppear {
+                    viewModel.fetchPokemons() // Execute 'fetchPokemons' method.
+                }
             }
-        }
-        .onAppear {
-            viewModel.fetchPokemons() // Execute 'fetchPokemons' method.
+            .navigationTitle("Pokédex")
         }
     }
 }

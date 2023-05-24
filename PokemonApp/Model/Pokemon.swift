@@ -19,5 +19,5 @@ struct Pokemon: Decodable, Identifiable { // Pokemons properties.
     let isDefault: Bool?
     let order: Int?
     let weight: Int?
-    let url: String
+    let url: String?
 }
