@@ -24,4 +24,6 @@ final class PokemonListViewModel: ObservableObject { // The 'final' reserved key
             }
         }
     }
+
+    
 }

@@ -12,17 +12,33 @@ struct PokemonListView: View {
     // @StateObject: Ensures that the viewModel object is kept alive for the lifetime of the view, even if there are state changes.
     @StateObject var viewModel = PokemonListViewModel()
 
+    private let adaptativeColumns = [
+        GridItem(.adaptive(minimum: 150))
+    ]
+
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    ForEach(viewModel.pokemons) { pokemon in
+                LazyVGrid(columns: adaptativeColumns, spacing: 10) {
+                    ForEach(viewModel.pokemons, id: \.name) { pokemon in
+                        let pokemonName = pokemon.name.capitalized
+                        let finalPokemonName = pokemonName.replacingOccurrences(of: "-", with: " ")
                         NavigationLink(
                             destination: PokemonDetailView(
                                 viewModel: PokemonDetailViewModel(
                                     pokemon: pokemon))
                         ) {
-                            Text(pokemon.name)
+                            VStack {
+                                // POKEMON IMAGE
+                                
+                                Text(finalPokemonName)
+                                    .frame(width: 150, height: 150)
+                                    .background(.gray)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                    .padding(20)
+                                    .shadow(color: .black, radius: 5)
+                            }
                         }
                     }
                 }
