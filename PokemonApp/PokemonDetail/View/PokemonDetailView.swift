@@ -13,43 +13,80 @@ struct PokemonDetailView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray.ignoresSafeArea()
+                LinearGradient(colors: [Color("color4"), Color("color2"), Color("color1")], startPoint: .bottom, endPoint: .top)
+                    .ignoresSafeArea()
 
                 VStack {
-                    // POKEMON CELL VIEW {
+                    Text(viewModel.pokemonName())
+                        .font(.custom("PressStart2P-Regular", size: 24))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color("color6"))
+                        .shadow(color: .black, radius: 3)
+                        .padding(.top, 30)
+
                     AsyncImage(url: viewModel.pokemonImageUrl()) { image in
                         image
                             .resizable()
                             .scaledToFit()
-                            .shadow(color: .black, radius: 5)
                     } placeholder: {
                         ProgressView()
-                            .scaleEffect(1.5)
+                            .scaleEffect(2.3)
                     }
-                    .frame(maxWidth: 280)
-                    .background(.gray)
-                    .cornerRadius(50)
+                    .frame(width: 300, height: 300)
                     .shadow(color: .black, radius: 5)
-                    // }
 
                     VStack {
                         Text("ID: \(viewModel.pokemon.id ?? 0)")
                             .padding(.vertical, 3)
                             .padding(.horizontal, 9)
-                            .background(.green)
+                            .background(.yellow)
                             .cornerRadius(10)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .padding()
-                        Text("Altura: \(viewModel.formatWeightHeight(value:viewModel.pokemon.height ?? 0)) m")
-                        Text("Peso: \(viewModel.formatWeightHeight(value:viewModel.pokemon.weight ?? 0)) kg")
-                        Text("EXP: \(viewModel.pokemon.baseExperience ?? 0)")
+                            .padding(.top, 20)
+
+                        VStack {
+                            HStack {
+                                Text("Altura: \(viewModel.formatWeightHeight(value:viewModel.pokemon.height ?? 0)) m")
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("color4"))
+                                    .cornerRadius(15)
+                                    .shadow(color: .black, radius: 2)
+                                    .padding(.bottom, 10)
+                            }
+                            .font(.custom("AmaticSC-Bold", size: 28))
+
+                            HStack {
+                                Text("Peso: \(viewModel.formatWeightHeight(value:viewModel.pokemon.weight ?? 0)) kg")
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("color4"))
+                                    .cornerRadius(15)
+                                    .shadow(color: .black, radius: 2)
+                                    .padding(.bottom, 10)
+                            }
+                            .font(.custom("AmaticSC-Bold", size: 28))
+
+                            HStack {
+                                Text("EXP: \(viewModel.pokemon.baseExperience ?? 0)")
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color("color4"))
+                                    .cornerRadius(15)
+                                    .shadow(color: .black, radius: 2)
+                            }
+                            .font(.custom("AmaticSC-Bold", size: 28))
+                            .padding(.bottom, 30)
+                        }
                     }
+                    .padding(30)
                 }
             }
             .onAppear {
                 viewModel.searchPokemon()
             }
-            .navigationTitle(viewModel.pokemonName())
+            .navigationTitle("")
         }
     }
 }

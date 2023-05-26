@@ -11,7 +11,7 @@ import SwiftUI
 struct PokemonAppApp: App {
     var body: some Scene {
         WindowGroup {
-            PokemonListView() // ContentView substituter.
+            HomeAppView() // ContentView substituter.
         }
     }
 }

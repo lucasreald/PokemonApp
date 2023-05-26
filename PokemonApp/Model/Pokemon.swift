@@ -8,8 +8,8 @@
 
 import Foundation
 
-// Decodable: A type that can decode itself from an external representation.
-// Identifiable: A class of types whose instances hold the value of an entity with stable identity.
+/// Decodable: A type that can decode itself from an external representation.
+/// Identifiable: A class of types whose instances hold the value of an entity with stable identity.
 
 struct PokemonPage: Codable {
     let count: Int
