@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct PokemonListView: View {
-
-    // @StateObject: Ensures that the viewModel object is kept alive for the lifetime of the view, even if there are state changes.
     @StateObject var viewModel = PokemonListViewModel()
 
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("color4")
-                    .ignoresSafeArea()
+                Color("color4").ignoresSafeArea()
 
                 ScrollView {
                     VStack {
                         ForEach(viewModel.searchResults, id: \.name) { pokemon in
                             let pokemonName = pokemon.name.capitalized
                             let finalPokemonName = pokemonName.replacingOccurrences(of: "-", with: " ")
+
                             NavigationLink(
                                 destination: PokemonDetailView(
                                     viewModel: PokemonDetailViewModel(
@@ -43,11 +41,17 @@ struct PokemonListView: View {
                         }
                     }
                     .onAppear {
-                        viewModel.fetchPokemons() // Execute 'fetchPokemons' method.
+                        viewModel.fetchPokemons()
                     }
                 }
-                .navigationTitle("Pokédex")
+                .navigationTitle("")
                 .toolbarBackground((Color("color4")), for: .navigationBar)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Text("Pokémons: \(viewModel.numberOfPokemons())")
+                            .foregroundColor(.white)
+                    }
+                }
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
         }

@@ -13,8 +13,7 @@ struct PokemonDetailView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                LinearGradient(colors: [Color("color4"), Color("color2"), Color("color1")], startPoint: .bottom, endPoint: .top)
-                    .ignoresSafeArea()
+                Color("color4").ignoresSafeArea()
 
                 VStack {
                     Text(viewModel.pokemonName())
@@ -22,7 +21,7 @@ struct PokemonDetailView: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color("color6"))
                         .shadow(color: .black, radius: 3)
-                        .padding(.top, 30)
+                        .padding(.bottom, 5)
 
                     AsyncImage(url: viewModel.pokemonImageUrl()) { image in
                         image
@@ -34,53 +33,51 @@ struct PokemonDetailView: View {
                     }
                     .frame(width: 300, height: 300)
                     .shadow(color: .black, radius: 5)
+                    .background(Color("color2"))
+                    .cornerRadius(60)
 
                     VStack {
                         Text("ID: \(viewModel.pokemon.id ?? 0)")
-                            .padding(.vertical, 3)
-                            .padding(.horizontal, 9)
+                            .frame(height: 30)
+                            .padding(.horizontal, 10)
                             .background(.yellow)
                             .cornerRadius(10)
                             .foregroundColor(.black)
-                            .padding()
-                            .padding(.top, 20)
+                            .padding(.bottom, 10)
 
                         VStack {
                             HStack {
                                 Text("Altura: \(viewModel.formatWeightHeight(value:viewModel.pokemon.height ?? 0)) m")
-                                    .padding(10)
+                                    .padding(5)
                                     .frame(maxWidth: .infinity)
-                                    .background(Color("color4"))
-                                    .cornerRadius(15)
-                                    .shadow(color: .black, radius: 2)
-                                    .padding(.bottom, 10)
+                                    .background(Color("color2"))
+                                    .cornerRadius(10)
+                                    .padding(.bottom, 8)
                             }
-                            .font(.custom("AmaticSC-Bold", size: 28))
+                            .font(.custom("AmaticSC-Bold", size: 24))
 
                             HStack {
                                 Text("Peso: \(viewModel.formatWeightHeight(value:viewModel.pokemon.weight ?? 0)) kg")
-                                    .padding(10)
+                                    .padding(5)
                                     .frame(maxWidth: .infinity)
-                                    .background(Color("color4"))
-                                    .cornerRadius(15)
-                                    .shadow(color: .black, radius: 2)
-                                    .padding(.bottom, 10)
+                                    .background(Color("color2"))
+                                    .cornerRadius(10)
+                                    .padding(.bottom, 8)
                             }
-                            .font(.custom("AmaticSC-Bold", size: 28))
+                            .font(.custom("AmaticSC-Bold", size: 24))
 
                             HStack {
                                 Text("EXP: \(viewModel.pokemon.baseExperience ?? 0)")
-                                    .padding(10)
+                                    .padding(5)
                                     .frame(maxWidth: .infinity)
-                                    .background(Color("color4"))
-                                    .cornerRadius(15)
-                                    .shadow(color: .black, radius: 2)
+                                    .background(Color("color2"))
+                                    .cornerRadius(10)
+                                    .padding(.bottom, 8)
                             }
-                            .font(.custom("AmaticSC-Bold", size: 28))
-                            .padding(.bottom, 30)
+                            .font(.custom("AmaticSC-Bold", size: 24))
                         }
                     }
-                    .padding(30)
+                    .padding(.horizontal, 30)
                 }
             }
             .onAppear {

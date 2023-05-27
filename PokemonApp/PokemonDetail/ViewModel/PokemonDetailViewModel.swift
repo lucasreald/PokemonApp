@@ -39,7 +39,6 @@ final class PokemonDetailViewModel: ObservableObject {
     func formatWeightHeight(value: Int) -> String {
         let doubleValue = Double(value)
         let stringValue = String(format: "%.2f", doubleValue / 10)
-
         return stringValue
     }
 }

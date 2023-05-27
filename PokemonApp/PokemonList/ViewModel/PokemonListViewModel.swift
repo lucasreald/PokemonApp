@@ -45,4 +45,9 @@ final class PokemonListViewModel: ObservableObject { // The 'final' reserved key
             searchResults = pokemons.filter { $0.name.contains(searchText.lowercased()) }
         }
     }
+
+    func numberOfPokemons() -> String{
+        let pokemonCounter = String(pokemons.count)
+        return pokemonCounter
+    }
 }

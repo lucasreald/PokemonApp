@@ -10,8 +10,7 @@ import SwiftUI
 struct AboutView: View {
     var body: some View {
         ZStack {
-            LinearGradient(colors: [Color("color4"), Color("color2"), Color("color1")], startPoint: .bottom, endPoint: .top)
-                .ignoresSafeArea()
+            Color("color4").ignoresSafeArea()
 
             VStack {
                 Text("Sobre")
@@ -30,7 +29,6 @@ struct AboutView: View {
 
                 Text("A Pokédex é uma enciclopédia virtual que detém todas as espécies de pokémons e suas principais características.")
                     .font(.custom("AmaticSC-Bold", size: 33))
-                    .font(.system(size: 20))
                     .padding()
                     .padding(.bottom, 20)
                     .multilineTextAlignment(.center)
