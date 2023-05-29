@@ -13,25 +13,14 @@ struct AboutView: View {
             Color("color4").ignoresSafeArea()
 
             VStack {
-                Text("Sobre")
-                   .font(.custom("PressStart2P-Regular", size: 54))
-                   .foregroundColor(Color("color6"))
-                   .padding(.top, 40)
-                   .padding(.bottom, 40)
-                   .shadow(color: .black, radius: 3)
+                Texts(name: "Sobre", size: 50)
 
-                Image("pokemon3")
-                    .resizable()
-                    .scaledToFit()
-                    .shadow(color: .black, radius: 7)
-                    .padding(.top, -25)
-                    .frame(width: 300)
+                Images(imageName: "pokemon3")
 
-                Text("A Pokédex é uma enciclopédia virtual que detém todas as espécies de pokémons e suas principais características.")
-                    .font(.custom("AmaticSC-Bold", size: 33))
-                    .padding()
-                    .padding(.bottom, 20)
-                    .multilineTextAlignment(.center)
+                Texts(name: "A Pokédex é uma enciclopédia virtual que detém todas as espécies de pokémons e suas principais características.",
+                      size: 33, font: "AmaticSC-Bold",
+                      color: .black,
+                      isShadowOn: false)
             }
         }
     }

@@ -13,7 +13,7 @@ import SwiftUI
 
 // ObservableObject: A type of object with a publisher that emits before the object has changed.
 
-final class PokemonListViewModel: ObservableObject { // The 'final' reserved key means that class will be not inherit and also help the compilation proccess.
+ class PokemonListViewModel: ObservableObject { // The 'final' reserved key means that class will be not inherit and also help the compilation proccess.
     let service: PokemonService = PokemonService() // Make the call to the API to get the list of pokémons.
     var pokemons: [Pokemon] = [] // Allows changes to this property to be automatically reflected in the user interface if it is being observed.
     @Published var searchResults: [Pokemon] = [] // Publised: Anuncia algo novo para ser atualizado na view.
@@ -46,8 +46,14 @@ final class PokemonListViewModel: ObservableObject { // The 'final' reserved key
         }
     }
 
-    func numberOfPokemons() -> String{
+    func numberOfPokemons() -> String {
         let pokemonCounter = String(pokemons.count)
         return pokemonCounter
+    }
+
+    func pokemonName(_ pokemon: Pokemon) -> String {
+        let pokemonName = pokemon.name.capitalized
+        let finalPokemonName = pokemonName.replacingOccurrences(of: "-", with: " ")
+        return finalPokemonName
     }
 }

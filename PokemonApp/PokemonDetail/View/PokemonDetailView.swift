@@ -16,12 +16,8 @@ struct PokemonDetailView: View {
                 Color("color4").ignoresSafeArea()
 
                 VStack {
-                    Text(viewModel.pokemonName())
-                        .font(.custom("PressStart2P-Regular", size: 24))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Color("color6"))
-                        .shadow(color: .black, radius: 3)
-                        .padding(.bottom, 5)
+                    Texts(name: viewModel.pokemonName(), size: 20)
+                        .padding()
 
                     AsyncImage(url: viewModel.pokemonImageUrl()) { image in
                         image

@@ -16,44 +16,41 @@ struct PokemonListView: View {
                 Color("color4").ignoresSafeArea()
 
                 ScrollView {
-                    VStack {
-                        ForEach(viewModel.searchResults, id: \.name) { pokemon in
-                            let pokemonName = pokemon.name.capitalized
-                            let finalPokemonName = pokemonName.replacingOccurrences(of: "-", with: " ")
-
-                            NavigationLink(
-                                destination: PokemonDetailView(
-                                    viewModel: PokemonDetailViewModel(
-                                        pokemon: pokemon))
-                            ) {
-                                VStack {
-                                    Text(finalPokemonName)
-                                        .font(.custom("AmaticSC-Bold", size: 35))
-                                        .frame(maxWidth: .infinity)
-                                        .background(Color("color5"))
-                                        .foregroundColor(.white)
-                                        .cornerRadius(10)
-                                        .shadow(color: .black, radius: 3)
-                                        .padding(.horizontal, 30)
-                                        .padding(6)
-                                }
-                            }
+                    pokemonList
+                        .onAppear {
+                            viewModel.fetchPokemons()
                         }
-                    }
-                    .onAppear {
-                        viewModel.fetchPokemons()
-                    }
                 }
                 .navigationTitle("")
                 .toolbarBackground((Color("color4")), for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Text("Pokémons: \(viewModel.numberOfPokemons())")
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                     }
                 }
             }
-            .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+            .searchable(text: $viewModel.searchText,
+                        placement: .navigationBarDrawer(displayMode: .always))
+        }
+    }
+
+    var pokemonList: some View {
+        VStack {
+            ForEach(viewModel.searchResults, id: \.name) { pokemon in
+                NavigationLink(
+                    destination: PokemonDetailView(
+                        viewModel: PokemonDetailViewModel(
+                        pokemon: pokemon))
+                ) {
+                    VStack {
+                        Buttons(buttonName: viewModel.pokemonName(pokemon),
+                                fontSize: 35,
+                                isMaxWidth: true)
+                        .padding()
+                    }
+                }
+            }
         }
     }
 }
