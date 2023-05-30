@@ -25,20 +25,34 @@ final class PokemonDetailViewModel: ObservableObject {
         }
     }
 
-    func pokemonImageUrl() -> URL? {
+    var pokemonImageUrl: URL? {
         guard let id = pokemon.id else { return nil }
         return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png")
     }
 
-    func pokemonName() -> String {
-        let pokemonName = pokemon.name.capitalized
-        let finalPokemonName = pokemonName.replacingOccurrences(of: "-", with: " ")
-        return finalPokemonName
+    var pokemonName: String {
+        let pokemonName = pokemon.name.capitalized.replacingOccurrences(of: "-", with: " ")
+        return pokemonName
     }
 
-    func formatWeightHeight(value: Int) -> String {
-        let doubleValue = Double(value)
-        let stringValue = String(format: "%.2f", doubleValue / 10)
+    var formatHeight: String {
+        let doubleValue = Double(pokemon.height ?? 0)
+        let stringValue = String(format: "Altura: %.2f m", doubleValue / 10)
         return stringValue
     }
+
+    var formatWeight: String {
+        let doubleValue = Double(pokemon.weight ?? 0)
+        let stringValue = String(format: "Peso: %.2f kg", doubleValue / 10)
+        return stringValue
+    }
+
+    var baseExperience: String {
+        "EXP: \(pokemon.baseExperience ?? 0)"
+    }
+
+    var pokemonId: String {
+        "ID: \(pokemon.id ?? 0)"
+    }
+
 }

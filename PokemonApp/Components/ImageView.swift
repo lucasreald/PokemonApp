@@ -1,5 +1,5 @@
 //
-//  ImageDetail.swift
+//  ImageView.swift
 //  PokemonApp
 //
 //  Created by Lucas Real Dias on 29/05/23.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct Images: View {
-    @State var imageName = "pokemon1"
+struct ImageView: View {
+    var imageName = "homeImage"
 
     var body: some View {
         Image(imageName)
@@ -21,6 +21,6 @@ struct Images: View {
 
 struct ImageDetail_Previews: PreviewProvider {
     static var previews: some View {
-        Images()
+        ImageView()
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 /// Decodable: A type that can decode itself from an external representation.
 /// Identifiable: A class of types whose instances hold the value of an entity with stable identity.
 
-struct Pokemon: Codable, Identifiable { // Pokemons properties.
+struct Pokemon: Codable, Identifiable {
     var id: Int?
     let name: String
     let baseExperience: Int?

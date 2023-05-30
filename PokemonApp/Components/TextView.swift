@@ -1,5 +1,5 @@
 //
-//  Title.swift
+//  TextView.swift
 //  PokemonApp
 //
 //  Created by Lucas Real Dias on 29/05/23.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct Texts: View {
-    @State var name = "Pokédex"
-    @State var size = 40
-    @State var font = "PressStart2P-Regular"
-    @State var color = Color("color6")
-    @State var isShadowOn = true
+struct TextView: View {
+    var name = "Pokédex"
+    var size = 40
+    var font = "PressStart2P-Regular"
+    var color = Colors.lightBrown
+    var isShadowOn = true
 
     var body: some View {
         Text(name)
@@ -25,6 +25,6 @@ struct Texts: View {
 
 struct Title_Previews: PreviewProvider {
     static var previews: some View {
-        Texts()
+        TextView()
     }
 }

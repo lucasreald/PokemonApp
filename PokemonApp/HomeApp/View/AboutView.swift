@@ -10,17 +10,21 @@ import SwiftUI
 struct AboutView: View {
     var body: some View {
         ZStack {
-            Color("color4").ignoresSafeArea()
+            Colors.darkGreen.ignoresSafeArea()
 
             VStack {
-                Texts(name: "Sobre", size: 50)
+                TextView(name: "Sobre", size: 50)
+                    .padding()
 
-                Images(imageName: "pokemon3")
+                ImageView(imageName: "aboutImage")
+                    .padding()
 
-                Texts(name: "A Pokédex é uma enciclopédia virtual que detém todas as espécies de pokémons e suas principais características.",
-                      size: 33, font: "AmaticSC-Bold",
+                TextView(name: "A Pokédex é uma enciclopédia virtual que detém todas as espécies de pokémons e suas principais características.",
+                      size: 28,
+                      font: "AmaticSC-Bold",
                       color: .black,
                       isShadowOn: false)
+                    .padding()
             }
         }
     }

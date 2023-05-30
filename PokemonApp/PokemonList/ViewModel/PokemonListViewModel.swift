@@ -11,21 +11,28 @@ import Foundation
 import UIKit
 import SwiftUI
 
-// ObservableObject: A type of object with a publisher that emits before the object has changed.
+/// ObservableObject: A type of object with a publisher that emits before the object has changed.
 
  class PokemonListViewModel: ObservableObject { // The 'final' reserved key means that class will be not inherit and also help the compilation proccess.
-    let service: PokemonService = PokemonService() // Make the call to the API to get the list of pokémons.
-    var pokemons: [Pokemon] = [] // Allows changes to this property to be automatically reflected in the user interface if it is being observed.
     @Published var searchResults: [Pokemon] = [] // Publised: Anuncia algo novo para ser atualizado na view.
+
     @Published var searchText = "" {
         didSet {
             filterPokemons()
         }
     }
 
+    let service: PokemonService = PokemonService() // Make the call to the API to get the list of pokémons.
+    var pokemons: [Pokemon] = [] // Allows changes to this property to be automatically reflected in the user interface if it is being observed.
+
+    var numberOfPokemons: String {
+        let pokemonCounter = String(pokemons.count)
+        return "Pokémons: \(pokemonCounter)"
+    }
+
     init() {
         // Search bar color
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor(Color("searchBarGrey"))
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor(Colors.searchBarGray)
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .black
     }
 
@@ -46,14 +53,8 @@ import SwiftUI
         }
     }
 
-    func numberOfPokemons() -> String {
-        let pokemonCounter = String(pokemons.count)
-        return pokemonCounter
-    }
-
     func pokemonName(_ pokemon: Pokemon) -> String {
-        let pokemonName = pokemon.name.capitalized
-        let finalPokemonName = pokemonName.replacingOccurrences(of: "-", with: " ")
-        return finalPokemonName
+        let pokemonName = pokemon.name.capitalized.replacingOccurrences(of: "-", with: " ")
+        return pokemonName
     }
 }

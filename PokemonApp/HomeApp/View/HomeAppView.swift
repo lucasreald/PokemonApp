@@ -11,27 +11,31 @@ struct HomeAppView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                LinearGradient(colors: [Color("color4"), Color("color2"), Color("color1")],
+                LinearGradient(colors: [Colors.darkGreen, Colors.mediumGreen, Colors.lightGreen],
                                startPoint: .bottom, endPoint: .top).ignoresSafeArea()
 
                 VStack {
                     VStack {
-                        Texts(name: "Pokédex")
+                        TextView(name: "Pokédex", size: 45)
+                            .padding()
 
-                        Images()
+                        ImageView()
+                            .padding()
                     }
 
                     NavigationLink {
                         PokemonListView()
                     } label: {
-                        Buttons()
+                        ButtonView(buttonName: "Consultar")
                     }
+                    .padding()
 
                     NavigationLink {
                         AboutView()
                     } label: {
-                        Buttons(buttonName: "Sobre")
+                        ButtonView(buttonName: "Sobre")
                     }
+                    .padding()
                 }
             }
         }

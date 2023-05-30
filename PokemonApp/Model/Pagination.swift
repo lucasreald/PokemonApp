@@ -6,7 +6,7 @@
 //
 
 
-// Decodable: A type that can decode itself from an external representation.
+/// Decodable: A type that can decode itself from an external representation.
 
 struct Pagination: Decodable {
     let results: [Pokemon] // The constant 'results' is an array of the Pokemon struct.

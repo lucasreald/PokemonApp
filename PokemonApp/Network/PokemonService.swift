@@ -8,7 +8,8 @@
 
 import Foundation
 
-// API solicitation.
+// MARK: - API solicitation
+
 final class PokemonService { // The 'final' reserved key means that class will be not inherit and also help the compilation proccess.
     init() {}
 
