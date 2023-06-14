@@ -22,6 +22,8 @@ import SwiftUI
         }
     }
 
+    @Published var errorDescription: String = ""
+
     let service: PokemonService = PokemonService() // Make the call to the API to get the list of pokémons.
     var pokemons: [Pokemon] = [] // Allows changes to this property to be automatically reflected in the user interface if it is being observed.
 
@@ -37,10 +39,17 @@ import SwiftUI
     }
 
     func fetchPokemons() { // Search pokémons from API and update the 'pokemons' property with the obtained data.
-        service.pokemonList { pagination in
-            DispatchQueue.main.async { // Ensure that updates to the UI are done on the main thread (UI thread).
-                self.pokemons = pagination.results // The 'results' property contains the pokémon list obtained from the API.
-                self.filterPokemons()
+        service.pokemonList { result in
+            switch result {
+            case .success(let pagination):
+                DispatchQueue.main.async { // Ensure that updates to the UI are done on the main thread (UI thread).
+                    self.pokemons = pagination.results // The 'results' property contains the pokémon list obtained from the API.
+                    self.filterPokemons()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async { // Ensure that updates to the UI are done on the main thread (UI thread).
+                    self.errorDescription = error.localizedDescription
+                }
             }
         }
     }

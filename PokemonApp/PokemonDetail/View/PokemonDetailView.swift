@@ -36,6 +36,9 @@ struct PokemonDetailView: View {
                             .foregroundColor(.white)
                     }
                 }
+                if !viewModel.errorDescription.isEmpty {
+                    Text(viewModel.errorDescription)
+                }
             }
             .onAppear {
                 viewModel.searchPokemon()

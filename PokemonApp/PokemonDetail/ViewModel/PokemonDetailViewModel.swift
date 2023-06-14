@@ -10,6 +10,9 @@ import Combine
 
 final class PokemonDetailViewModel: ObservableObject {
     @Published var pokemon: Pokemon
+
+    @Published var errorDescription: String = ""
+
     let service = PokemonService()
 
     init(pokemon: Pokemon) {
@@ -18,10 +21,18 @@ final class PokemonDetailViewModel: ObservableObject {
 
     func searchPokemon() {
         guard let url = pokemon.url else { return }
-        service.pokemonDetail(url: url) { pokemon in
-            DispatchQueue.main.async {
-                self.pokemon = pokemon
+        service.pokemonDetail(url: url) { result in
+            switch result {
+            case .success(let pokemon):
+                DispatchQueue.main.async {
+                    self.pokemon = pokemon
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.errorDescription = error.localizedDescription
+                }
             }
+
         }
     }
 

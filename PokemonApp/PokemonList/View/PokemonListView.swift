@@ -29,6 +29,9 @@ struct PokemonListView: View {
                             .foregroundColor(.white)
                     }
                 }
+                if !viewModel.errorDescription.isEmpty {
+                    Text(viewModel.errorDescription)
+                }
             }
             .searchable(text: $viewModel.searchText,
                         placement: .navigationBarDrawer(displayMode: .always))
